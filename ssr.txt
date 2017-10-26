@@ -65,22 +65,25 @@ vi apiconfig.py
 API_INTERFACE = 'sspanelv2' ,将 sspanelv2 改为 sspanelv3ssr
 
 pip install -r requirements.txt
+
+\\ 需要修改 userapiconfig.py user-config.json
+
 	cp apiconfig.py userapiconfig.py
 	cp config.json user-config.json
 
-cp config.json user-config.json  // 复制备份
+//cp config.json user-config.json  // 复制备份
 
-cp mysql.json usermysql.json
+//cp mysql.json usermysql.json
 
 ls -al
 
-vi config.json   //修改 加密方式 为 chacha20
+//vi config.json   //修改 加密方式 为 chacha20
 
 
-vi usermysql.json   // 修改 数据库 连接，节点编号
+//vi usermysql.json   // 修改 数据库 连接，节点编号
 
 
-python server.py   // 测试不通，修改 防火墙 配置
+//python server.py   // 测试不通，修改 防火墙 配置
 
 
 修改防火墙配置
@@ -157,6 +160,11 @@ vi public.xml
 chmod +x *.sh && git pull && ./logrun.sh && ./tail.sh
 
   
+
+  
+运    行: ./logrun.sh 
+查看日志：./tail.sh
+
 
 网站后台，修改管理员 端口号 21000 , 重启 shutdown -r now ,
 
