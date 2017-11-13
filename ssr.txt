@@ -10,22 +10,18 @@ git clone -b manyuser https://github.com/Jacky2/shadowsocks.git
 
 pip install -r requirements.txt
 
-\\ ĞèÒªĞŞ¸Ä userapiconfig.py user-config.json
+cd shadowsocks
+cp apiconfig.py userapiconfig.py && cp config.json user-config.json
+\\ éœ€è¦ä¿®æ”¹ userapiconfig.py 
 
-	cp apiconfig.py userapiconfig.py && cp config.json user-config.json
-
-
-ÉèÖÃ¿ª»ú×Ô¶¯ÔËĞĞ
+è®¾ç½®å¼€æœºè‡ªåŠ¨è¿è¡Œ
 
 chmod +x *.sh && ./logrun.sh && ./tail.sh
 
-  
+ 
+è¿    è¡Œ: ./logrun.sh 
+æŸ¥çœ‹æ—¥å¿—ï¼š./tail.sh
 
-  
-ÔË    ĞĞ: ./logrun.sh 
-²é¿´ÈÕÖ¾£º./tail.sh
+ç½‘ç«™åå°ï¼Œä¿®æ”¹ç®¡ç†å‘˜ ç«¯å£å· 21000 , é‡å¯ shutdown -r now ,
 
-
-ÍøÕ¾ºóÌ¨£¬ĞŞ¸Ä¹ÜÀíÔ± ¶Ë¿ÚºÅ 21000 , ÖØÆô shutdown -r now ,
-
-²âÊÔ ¿ÉÒÔÊ¹ÓÃÁË¡£
+æµ‹è¯• å¯ä»¥ä½¿ç”¨äº†ã€‚
