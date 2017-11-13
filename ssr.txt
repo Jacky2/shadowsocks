@@ -1,163 +1,23 @@
-
-
-
-
-cd  转到 根目录
-
-
-cd
-
-yum install m2crypto python-setuptools && easy_install pip
-
-yum install git -y
-
-pip install --upgrade pip 
-
-pip install --upgrade setuptools
-
-pip install cymysql lsof lrzsz python-devel libffi-devel openssl-devel
-
-
-安装libsodium，以启用chacha20 加密 
-
-cd
-
-pwd
-
-yum -y groupinstall "Development Tools"  
-
-
-安装libsodium，以启用chacha20 加密 
-安装方式一：
-
 rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-
-yum install libsodium*
-
-安装方式二：（编译安装）
-wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz 
- 
-tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10  
-
-./configure && make -j2 && make install
-
-echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf  
-
-ldconfig  
+yum install m2crypto python-setuptools git lsof lsof lrzsz python-devel libffi-devel openssl-devel libsodium* && easy_install pip
+pip install --upgrade pip setuptools
+pip install cymysql
+echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf && ldconfig
 
 
-安装后端
-
-cd
-
-git clone -b manyuser https://github.com/breakwa11/shadowsocks.git
-
-ls -al 
-
-cd shadowsocks
-
-ls -al
-
-
-vi apiconfig.py
-
-API_INTERFACE = 'sspanelv2' ,将 sspanelv2 改为 sspanelv3ssr
+git clone -b manyuser https://github.com/Jacky2/shadowsocks.git
 
 pip install -r requirements.txt
 
 \\ 需要修改 userapiconfig.py user-config.json
 
-	cp apiconfig.py userapiconfig.py
-	cp config.json user-config.json
+	cp apiconfig.py userapiconfig.py && cp config.json user-config.json
 
-//cp config.json user-config.json  // 复制备份
-
-//cp mysql.json usermysql.json
-
-ls -al
-
-//vi config.json   //修改 加密方式 为 chacha20
-
-
-//vi usermysql.json   // 修改 数据库 连接，节点编号
-
-
-//python server.py   // 测试不通，修改 防火墙 配置
-
-
-修改防火墙配置
-
-cd /etc/firewalld 
-
-ls -al
-
-cd services
-
-vi nginx.xml
-
- 复制下面这个代码保存退出
---------------------------------------------- 
-<?xml version="1.0" encoding="utf-8"?>
-<service>
-  <short>Nginx</short>
-  <description>A web server that helps you by pass firewalls.</description>
-  <port protocol="tcp" port="80" />
-  <port protocol="tcp" port="443" />
-</service>
-
-vi shadowsocks.xml
-
-  复制下面这个代码保存退出
------------------------------------------------
-<?xml version="1.0" encoding="utf-8"?>
-<service>
-  <short>Shadowsocks</short>
-  <description>A fast tunnel proxy that helps you by pass firewalls.</description>
-  <port protocol="tcp" port="21000-23000" />
-  <port protocol="tcp" port="21000-23000" />
-</service>
-
-vi mysql.xml
-
-  复制下面这个代码保存退出
---------------------------------------------------------
-<?xml version="1.0" encoding="utf-8"?>
-<service>
-  <short>MySQL</short>
-  <description>MySQL Database Server</description>
-  <port protocol="tcp" port="3306"/>
-</service>
-
-ls -al
-
-现在来生效防火墙规则
-    转到目录
-
-cd ../zones/
-
-ls -al
-
-    编辑这个文件
-
-vi public.xml
-
-    （找到<service name="ssh"/> 在它下面把下面代码复制进去）保存退出
-----------------------------------
-  <service name="shadowsocks"/>
-  <service name="nginx"/>
-  <service name="mysql"/>
------------------------
--------------
-   现在重启防火墙
-
- firewall-cmd --reload
-
-   （提示 success 即可）
 
 设置开机自动运行
 
-chmod +x *.sh && git pull && ./logrun.sh && ./tail.sh
+chmod +x *.sh && ./logrun.sh && ./tail.sh
 
   
 
@@ -169,9 +29,3 @@ chmod +x *.sh && git pull && ./logrun.sh && ./tail.sh
 网站后台，修改管理员 端口号 21000 , 重启 shutdown -r now ,
 
 测试 可以使用了。
-
-
-
-
-
-
